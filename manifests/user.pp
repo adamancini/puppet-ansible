@@ -46,7 +46,7 @@ class ansible::user(
 ) {
 
   include ansible::params
-  require ssh
+  require ssh::server
 
   # Create an 'ansible' user
   user { 'ansible':
