@@ -9,21 +9,7 @@
 #
 class ansible::params {
 
-  # Support for Facter < 1.6.1
-  if $::osfamily == undef {
-    case $::operatingsystem {
-      'ubuntu', 'debian': {
-        $operatingsystemfamily = 'Debian'
-      }
-      default: {
-        $osfamily = $::operatingsystem
-      }
-    }
-  } else {
-    $operatingsystemfamily = $::osfamily
-  }
-
-  case $operatingsystemfamily {
+  case $facts['osfamily'] {
     'Debian': {
       $pip_dep_package = ['python-yaml','python-jinja2','python-paramiko',
       'python-pkg-resources','python-pip','python-crypto','python-markupsafe',
