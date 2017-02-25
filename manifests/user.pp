@@ -87,7 +87,6 @@ class ansible::user(
       owner   => 'root',
       group   => 'root',
       content => 'ansible ALL = NOPASSWD : ALL',
-      require => Package['sudo']
     }
   }
 
