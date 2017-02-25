@@ -46,6 +46,7 @@ class ansible::user(
 ) {
 
   include ansible::params
+  require ssh
 
   # Create an 'ansible' user
   user { 'ansible':
@@ -76,13 +77,8 @@ class ansible::user(
     require => Package['openssh-server']
   }
 
-  ensure_packages([ 'openssh-server' ])
-
   # Enable sudo
   if $ansible::user::sudo == 'enable' {
-
-    # Install Sudo if it don't already exist
-    ensure_packages([ 'sudo' ])
 
     # Ansible user can do everything with sudo
     file { '/etc/sudoers.d/ansible' :
